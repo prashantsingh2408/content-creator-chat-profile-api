@@ -28,6 +28,26 @@ async def test_groq_get(query: str):
         
 @app.post("/chat_content_api")
 async def chat_content_api(user_message: str):
+    """
+    Expected format: \n
+    Request Body:
+    user_message (str): 
+        <CHAT> \n
+        USER: hi \n
+        </CHAT> \n
+        <CONTENT> \n
+        Profile: \n
+        </CONTENT> \n
+
+    Expected Response: \n
+        <CHAT>   \n
+        USER: Hi   \n
+        BOT: Hi! How are you? What is your name?  \n
+        </CHAT>  \n
+        <CONTENT>  \n
+        Profile:  \n
+        </CONTENT>  \n
+    """
     try:
         response = chat_context_api.chat_content_api(user_message)
         return {
