@@ -11,8 +11,8 @@ app = FastAPI()
 async def chat_content_api(user_message: str):
     """
     Expected format: \n
-    Request Body:
-    user_message (str): 
+    Request Body: \n
+    user_message (str): \n
         <CHAT> \n
         USER: hi \n
         </CHAT> \n
