@@ -23,9 +23,13 @@ def read_prompt_file(prompt_file_path='prompt.txt'):
     except FileNotFoundError:
         return "Default system prompt if file not found."
 
-def chat_content_api(user_message):
+def chat_content_api(user_message, system_prompt_override=None):
     try:
-        system_prompt = read_prompt_file()
+        if system_prompt_override:
+            system_prompt = system_prompt_override
+        else:
+            system_prompt = read_prompt_file()
+           
         print(f"System prompt: {system_prompt}")
         
         completion = client.chat.completions.create(

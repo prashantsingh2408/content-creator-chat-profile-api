@@ -5,6 +5,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware  # Import CORS middleware
 import os
 import chat_context_api
+from typing import Optional
 
 app = FastAPI()
 
@@ -18,7 +19,7 @@ app.add_middleware(
 )
 
 @app.post("/chat_content_api")
-async def chat_content_api(user_message: str):
+async def chat_content_api(user_message: str, system_prompt: Optional[str] = None):
     """
     Expected format: \n
     Request Body: \n
@@ -40,7 +41,7 @@ async def chat_content_api(user_message: str):
         </CONTENT>  \n
     """
     try:
-        response = chat_context_api.chat_content_api(user_message)
+        response = chat_context_api.chat_content_api(user_message, system_prompt)
         return {
             "status": "success",
             "response": response
